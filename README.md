@@ -4,6 +4,12 @@ A simple FastAPI backend to store reminder messages with a date, time, and prefe
 
 ---
 
+## Deployed Link
+
+You can access the deployed API here: [Remind-me-later API](https://remind-me-later.onrender.com/docs)
+
+---
+
 ## Features
 
 - Add a new reminder with a message, datetime, and method (`sms` or `email`)
