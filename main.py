@@ -66,8 +66,8 @@ async def evaluate_image_quality(data: ImageRequest):
     try:
         response = requests.get(data.image_url)
         img = Image.open(io.BytesIO(response.content))
-        brisque = Brisque()
-        score = brisque.get_score(img)
+        score = Brisque(img).score()
+        #score = brisque.get_score(img)
         return { "score": score }
     except Exception as e:
         return { "error": str(e) }
