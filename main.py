@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import requests
 from PIL import Image
 import io
-from imquality.brisque import Brisque
+from imquality import brisque
 
 
 app = FastAPI()
@@ -66,7 +66,7 @@ async def evaluate_image_quality(data: ImageRequest):
     try:
         response = requests.get(data.image_url)
         img = Image.open(io.BytesIO(response.content))
-        score = Brisque(img).score()
+        score = brisque.score(img)
         #score = brisque.get_score(img)
         return { "score": score }
     except Exception as e:
