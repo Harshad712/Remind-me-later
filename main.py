@@ -1,9 +1,14 @@
 from fastapi import FastAPI
 from fastapi import HTTPException
-from models import Reminder
+from models import Reminder,ImageRequest
 from database import reminders_db
 import datetime
 from fastapi.middleware.cors import CORSMiddleware
+import requests
+from PIL import Image
+import io
+from imquality.brisque import Brisque
+
 
 app = FastAPI()
 
@@ -55,4 +60,15 @@ async def get_all_reminders():
         del r["_id"]
         reminders.append(r)
     return reminders
+
+@app.post("/evaluate")
+async def evaluate_image_quality(data: ImageRequest):
+    try:
+        response = requests.get(data.image_url)
+        img = Image.open(io.BytesIO(response.content))
+        brisque = Brisque()
+        score = brisque.get_score(img)
+        return { "score": score }
+    except Exception as e:
+        return { "error": str(e) }
 

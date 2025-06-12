@@ -2,3 +2,9 @@ fastapi
 uvicorn
 motor
 python-dotenv
+pydantic
+requests
+pillow
+imquality
+mangum
+

@@ -11,3 +11,6 @@ class Reminder(BaseModel):
     time: time
     message: str = Field(..., min_length=1)
     remind_by: RemindMethod
+    
+class ImageRequest(BaseModel):
+    image_url: str
